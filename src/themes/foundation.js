@@ -22,6 +22,11 @@ JSONEditor.defaults.themes.foundation = JSONEditor.AbstractTheme.extend({
       input.style.marginBottom = 0;
     }
     input.group = this.closest(input,'.form-control');
+
+    label = input.parentNode.getElementsByTagName('label')
+    if(label.length) {
+      label[0].appendChild(input);
+    }
   },
   getFormInputLabel: function(text) {
     var el = this._super(text);
@@ -66,7 +71,7 @@ JSONEditor.defaults.themes.foundation = JSONEditor.AbstractTheme.extend({
   addInputError: function(input,text) {
     if(!input.group) return;
     input.group.className += ' error';
-    
+
     if(!input.errmsg) {
       input.insertAdjacentHTML('afterend','<small class="error"></small>');
       input.errmsg = input.parentNode.getElementsByClassName('error')[0];
@@ -74,7 +79,7 @@ JSONEditor.defaults.themes.foundation = JSONEditor.AbstractTheme.extend({
     else {
       input.errmsg.style.display = '';
     }
-    
+
     input.errmsg.textContent = text;
   },
   removeInputError: function(input) {
